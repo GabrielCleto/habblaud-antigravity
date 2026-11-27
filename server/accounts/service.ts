@@ -129,7 +129,7 @@ export class AccountsService {
    * na lista) ganha "~2", "~3"... na ordem da lista. Devolve as entradas com os ids finais, na mesma ordem: são
    * eles que vão em AgentInfo.account. Conta que saiu perde o uso guardado.
    */
-  setProviderAccounts(provider: Exclude<Provider, 'claude'>, list: readonly ProviderAccountInput[]): readonly AccountEntry[] {
+  setProviderAccounts(provider: Provider, list: readonly ProviderAccountInput[]): readonly AccountEntry[] {
     const taken = new Set(this.list_.map((e) => e.id));
     for (const [p, entries] of this.external) if (p !== provider) for (const e of entries) taken.add(e.id);
     const next = list.map((input): AccountEntry => {
